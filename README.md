@@ -4,18 +4,23 @@
 curl https://bamjun.github.io/q/
 ```
 
+### 스크립트 바로실행
 
-```bash
-curl -s https://bamjun.github.io/q/ | bash
-```
+- `curl -s http://example.com/script.sh`는 지정된 URL에서 스크립트를 다운로드합니다. `-s` 옵션은 silent 모드로 curl의 진행 상황 및 오류 메시지를 숨깁니다.
+- 파이프(`|`)를 사용하여 `curl`로 다운로드한 데이터를 직접 `bash`에 전달하고 실행합니다.
 
-![alt text](images/markdown-image.png)
+  ```bash
+  curl -s https://bamjun.github.io/q/ | bash
+  ```
+
+  ![alt text](images/markdown-image.png)
 
 
+### up 파일 다운로드받기
 
-- up 파일 다운받기  
+- curl -o [저장할 파일명] [다운로드 url]  
 
-```bash
-curl -o up https://bamjun.github.io/q/up
-```
+  ```bash
+  curl -o up https://bamjun.github.io/q/up
+  ```
 
