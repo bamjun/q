@@ -35,13 +35,13 @@ echo -e "\033[48;5;230m\033[38;5;0m    docker build -t [your-image-name] .${COLO
 echo -e "\033[48;5;228m\033[38;5;0m  - Clear Docker Cache${COLOR_RESET}"
 echo -e "\033[48;5;230m\033[38;5;0m    docker build --no-cache -t [your-image-name] .${COLOR_RESET}"
 echo -e "\033[48;5;228m\033[38;5;0m  - 모든 Docker 컨테이너 중지${COLOR_RESET}"
-echo -e "\033[48;5;230m\033[38;5;0m    docker stop $(docker ps -aq)${COLOR_RESET}"
+echo -e "\033[48;5;230m\033[38;5;0m    docker stop \$(docker ps -aq)${COLOR_RESET}"
 echo -e "\033[48;5;228m\033[38;5;0m  - 모든 Docker 컨테이너 삭제${COLOR_RESET}"
-echo -e "\033[48;5;230m\033[38;5;0m    docker rm $(docker ps -aq)${COLOR_RESET}"
+echo -e "\033[48;5;230m\033[38;5;0m    docker rm \$(docker ps -aq)${COLOR_RESET}"
 echo -e "\033[48;5;228m\033[38;5;0m  - 모든 Docker 이미지 삭제${COLOR_RESET}"
-echo -e "\033[48;5;230m\033[38;5;0m    docker rmi $(docker images -q)${COLOR_RESET}"
+echo -e "\033[48;5;230m\033[38;5;0m    docker rmi \$(docker images -q)${COLOR_RESET}"
 echo -e "\033[48;5;228m\033[38;5;0m  - 모든 이미지 강제 삭제${COLOR_RESET}"
-echo -e "\033[48;5;230m\033[38;5;0m    docker rmi -f $(docker images -q)${COLOR_RESET}"
+echo -e "\033[48;5;230m\033[38;5;0m    docker rmi -f \$(docker images -q)${COLOR_RESET}"
 
 
 echo -e "\033[48;5;46m"
