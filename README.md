@@ -13,7 +13,9 @@ curl https://bamjun.github.io/q/
   curl -s https://bamjun.github.io/q/ | bash
   ```
 
-  ![alt text](images/markdown-image.png)
+  ![alt text](images/markdown-image.png)  
+  <br>
+  ![alt text](images/markdown-image-1.png)  
 
 
 ### up 파일 다운로드받기
