@@ -32,7 +32,7 @@ for ((i=0; i<=255; i++)) do
     if (( i == 0 )); then
         select_color="\033[38;5;${i}m"
         back="\033[48;5;${i}m"
-        echo -en "${select_color}This is select_color${back}"
+        echo -en "${select_color}This is select_color${back} No. ${i}"
         echo -n "${select_color}  ${back}"
         echo -en "${COLOR_RESET}"
         echo ""
@@ -41,19 +41,19 @@ for ((i=0; i<=255; i++)) do
     if (( i % 3 == 0 && i != 0 )); then
         select_color="\033[38;5;$((i-2))m"
         back="\033[48;5;$((i-2))m"
-        echo -en "${select_color}This is select_color${back}"
+        echo -en "${select_color}This is select_color${back} No. ${i}"
         echo -n "${select_color}  ${back}"
         echo -en "${COLOR_RESET}"
 
         select_color="\033[38;5;$((i-1))m"
         back="\033[48;5;$((i-1))m"
-        echo -en "${select_color}This is select_color${back}"
+        echo -en "${select_color}This is select_color${back} No. ${i}"
         echo -n "${select_color}  ${back}"
         echo -en "${COLOR_RESET}"
 
         select_color="\033[38;5;${i}m"
         back="\033[48;5;${i}m"
-        echo -en "${select_color}This is select_color${back}"
+        echo -en "${select_color}This is select_color${back} No. ${i}"
         echo -n "${select_color}  ${back}"
         echo -en "${COLOR_RESET}"
 
@@ -61,19 +61,19 @@ for ((i=0; i<=255; i++)) do
 
         select_color="\033[38;5;$((i-2))m"
         back="\033[48;5;$((i-2))m"
-        echo -en "${select_color}This is select_color${back}"
+        echo -en "${select_color}This is select_color${back} No. ${i}"
         echo -n "${select_color}  ${back}"
         echo -en "${COLOR_RESET}"
 
         select_color="\033[38;5;$((i-1))m"
         back="\033[48;5;$((i-1))m"
-        echo -en "${select_color}This is select_color${back}"
+        echo -en "${select_color}This is select_color${back} No. ${i}"
         echo -n "${select_color}  ${back}"
         echo -en "${COLOR_RESET}"
 
         select_color="\033[38;5;${i}m"
         back="\033[48;5;${i}m"
-        echo -en "${select_color}This is select_color${back}"
+        echo -en "${select_color}This is select_color${back} No. ${i}"
         echo -n "${select_color}  ${back}"
         echo -en "${COLOR_RESET}"
 
