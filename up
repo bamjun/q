@@ -33,7 +33,6 @@ Chore : 기타 작업
         remote_count=$(echo "$remotes" | wc -l)
         # 원격 저장소가 하나이고, 그 이름이 'origin'인지 확인
         if [[ $remote_count -eq 1 && $remotes == "origin" ]]; then
-            echo "원격 저장소 'origin'이 유일합니다."
             git commit -m "$index"
             # 현재 브랜치 이름을 찾는 명령어
             current_branch=$(git rev-parse --abbrev-ref HEAD)
