@@ -8,6 +8,14 @@ if [ "$1" = "check_version" ]; then
     exit
 fi
 
+github_repo_version=$(curl -s "https://bamjun.github.io/q/up" | bash -s -- check_version)
+
+if [ "$version_index" != "$github_repo_version" ]; then
+    echo "레포지토리 버전과 틀립니다."
+    exit
+fi
+
+
 # 변경된 파일들을 스테이징 영역에 추가
 git add .
 
