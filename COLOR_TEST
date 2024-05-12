@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# 색상 초기화
+COLOR_RESET="\033[0m"
+
+# 일반 색상과 색상 코드
+# declare -A colors
+# colors=(
+#     [COLOR_BLACK]="\033[0;30m"
+#     [COLOR_RED]="\033[0;31m"
+#     [COLOR_GREEN]="\033[0;32m"
+#     [COLOR_YELLOW]="\033[0;33m"
+#     [COLOR_BLUE]="\033[0;34m"
+#     [COLOR_MAGENTA]="\033[0;35m"
+#     [COLOR_CYAN]="\033[0;36m"
+# )
+
+# # 색상 출력
+# for color_name in "${!colors[@]}"; do
+#     color_code="${colors[$color_name]}"
+#     echo -e "${color_code}This is $color_name ${COLOR_RESET}"
+#     echo "$color_name: ${colors[$color_name]}"
+# done
+
+
+# echo ""
+# echo ""
+
+for ((i=0; i<=255; i++)) do
+
+
+    if (( i == 0 )); then
+        select_color="\033[38;5;${i}m"
+        back="\033[48;5;${i}m"
+        echo -en "${select_color}This is select_color${back}"
+        echo -n "${select_color}  ${back}"
+        echo -en "${COLOR_RESET}"
+        echo ""
+        echo ""
+    fi
+    if (( i % 3 == 0 && i != 0 )); then
+        select_color="\033[38;5;$((i-2))m"
+        back="\033[48;5;$((i-2))m"
+        echo -en "${select_color}This is select_color${back}"
+        echo -n "${select_color}  ${back}"
+        echo -en "${COLOR_RESET}"
+
+        select_color="\033[38;5;$((i-1))m"
+        back="\033[48;5;$((i-1))m"
+        echo -en "${select_color}This is select_color${back}"
+        echo -n "${select_color}  ${back}"
+        echo -en "${COLOR_RESET}"
+
+        select_color="\033[38;5;${i}m"
+        back="\033[48;5;${i}m"
+        echo -en "${select_color}This is select_color${back}"
+        echo -n "${select_color}  ${back}"
+        echo -en "${COLOR_RESET}"
+
+        echo ""
+
+        select_color="\033[38;5;$((i-2))m"
+        back="\033[48;5;$((i-2))m"
+        echo -en "${select_color}This is select_color${back}"
+        echo -n "${select_color}  ${back}"
+        echo -en "${COLOR_RESET}"
+
+        select_color="\033[38;5;$((i-1))m"
+        back="\033[48;5;$((i-1))m"
+        echo -en "${select_color}This is select_color${back}"
+        echo -n "${select_color}  ${back}"
+        echo -en "${COLOR_RESET}"
+
+        select_color="\033[38;5;${i}m"
+        back="\033[48;5;${i}m"
+        echo -en "${select_color}This is select_color${back}"
+        echo -n "${select_color}  ${back}"
+        echo -en "${COLOR_RESET}"
+
+        echo ""
+        echo ""
+    fi
+done
