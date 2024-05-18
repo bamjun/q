@@ -46,6 +46,13 @@ echo -e "\033[48;5;230m\033[38;5;0m    docker rmi \$(docker images -q)${COLOR_RE
 echo -e "\033[48;5;228m\033[38;5;0m  - 모든 이미지 강제 삭제${COLOR_RESET}"
 echo -e "\033[48;5;230m\033[38;5;0m    docker rmi -f \$(docker images -q)${COLOR_RESET}"
 
+echo -e "\033[48;5;228m\033[38;5;0m  - 정리되지 않은 파일을 정리${COLOR_RESET}"
+echo -e "\033[48;5;230m\033[38;5;0m    docker system prune -a${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  - 사용되지 않는 볼륨 정리${COLOR_RESET}"
+echo -e "\033[48;5;230m\033[38;5;0m    docker volume prune${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  - Docker 빌드 캐시 정리${COLOR_RESET}"
+echo -e "\033[48;5;230m\033[38;5;0m    docker builder prune${COLOR_RESET}"
+
 
 echo -e "\033[48;5;46m"
 echo -e "\033[48;5;46m ${COLOR_RESET}"
