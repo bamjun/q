@@ -26,3 +26,11 @@ curl https://bamjun.github.io/q/
   curl -o up https://bamjun.github.io/q/up
   ```
 
+
+
+### temp 임시 폴더만들기
+  `/c/projects/temp/Folder_{tody_ymd}` 경로에 임시작업용 폴더만들기.  
+
+  ```bash
+  curl -o temp https://bamjun.github.io/q/up
+  ```
