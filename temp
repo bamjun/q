@@ -4,7 +4,7 @@
 
 ##################### 버전관리 start
 
-version_index="0.0.1"
+version_index="0.0.2"
 
 
 # 버전 체크
@@ -42,9 +42,19 @@ directory="/c/projects/temp/Folder_$today"
 # 폴더가 존재하는지 확인하고 없으면 생성
 if [ ! -d "$directory" ]; then
     echo "폴더 '$directory' 가 존재하지 않아 생성합니다."
-    mkdir "$directory"
+    mkdir -p "$directory/001"
+    new_forder="$directory/001"
+    echo "폴더 '$new_forder'를 생성했습니다."
+else
+    subforder=1
+    while [ -d "$directory/$(printf '%03d' subforder)" ]; do
+        subforder=$(( subforder + 1))
+    done
+    new_forder="$directory/$(printf '%03d' subforder)"
+    mkdir "$new_forder"
+    echo "폴더 '$new_forder'를 생성했습니다."
 fi
 
 # 폴더로 이동
-echo "폴더 '$directory' 로 이동합니다."
-cd $directory
+echo "폴더 '$new_forder' 로 이동합니다."
+cd $new_forder
