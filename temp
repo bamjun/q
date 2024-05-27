@@ -43,24 +43,18 @@ directory="/c/projects/temp/Folder_$today"
 if [ ! -d "$directory" ]; then
     echo "폴더 '$directory' 가 존재하지 않아 생성합니다."
     mkdir -p "$directory/001"
-    new_forder="$directory/001"
-    echo "폴더 '$new_forder'를 생성했습니다."
+    new_folder="$directory/001"
+    echo "폴더 '$new_folder'를 생성했습니다."
 else
-    if [! -d "$directory/001" ]; then
-        mkdir -p "$directory/001"
-        new_forder="$directory/001"
-        echo "폴더 '$new_forder'를 생성했습니다."
-    else
-        subforder=1
-        while [ -d "$directory/$(printf '%03d' subforder)" ]; do
-            subforder=$(( subforder + 1))
-        done
-        new_forder="$directory/$(printf '%03d' subforder)"
-        mkdir "$new_forder"
-        echo "폴더 '$new_forder'를 생성했습니다."
-    fi
+    subfolder=1
+    while [ -d "$directory/$(printf '%03d' $subfolder)" ]; do
+        subfolder=$(( subfolder + 1))
+    done
+    new_folder="$directory/$(printf '%03d' $subfolder)"
+    mkdir "$new_folder"
+    echo "폴더 '$new_folder'를 생성했습니다."
 fi
 
 # 폴더로 이동
-echo "폴더 '$new_forder' 로 이동합니다."
-cd $new_forder
+echo "폴더 '$new_folder' 로 이동합니다."
+cd $new_folder
