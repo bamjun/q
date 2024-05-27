@@ -46,13 +46,19 @@ if [ ! -d "$directory" ]; then
     new_forder="$directory/001"
     echo "폴더 '$new_forder'를 생성했습니다."
 else
-    subforder=1
-    while [ -d "$directory/$(printf '%03d' subforder)" ]; do
-        subforder=$(( subforder + 1))
-    done
-    new_forder="$directory/$(printf '%03d' subforder)"
-    mkdir "$new_forder"
-    echo "폴더 '$new_forder'를 생성했습니다."
+    if [! -d "$directory/001" ]; then
+        mkdir -p "$directory/001"
+        new_forder="$directory/001"
+        echo "폴더 '$new_forder'를 생성했습니다."
+    else
+        subforder=1
+        while [ -d "$directory/$(printf '%03d' subforder)" ]; do
+            subforder=$(( subforder + 1))
+        done
+        new_forder="$directory/$(printf '%03d' subforder)"
+        mkdir "$new_forder"
+        echo "폴더 '$new_forder'를 생성했습니다."
+    fi
 fi
 
 # 폴더로 이동
