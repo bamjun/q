@@ -8,7 +8,7 @@ NO_COLOR='\033[0m'
 
 
 version_index="0.0.1"
-github_repo_address="https://bamjun.github.io/q/git_switch.sh"
+github_repo_address="https://bamjun.github.io/q/test_version.sh"
 
 source ./test_check_version.sh
 
