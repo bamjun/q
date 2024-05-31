@@ -2,7 +2,7 @@
 
 ##################### 버전관리 start
 
-version_index="0.0.0"
+version_index="0.0.1"
 
 
 # 버전 체크
