@@ -15,7 +15,7 @@ current_branch=$(git branch --show-current)
 
 # 스테이지에 올라가지 않은 변경 사항이 있는지 확인
 if ! git diff-index --quiet HEAD --; then
-  echo "You have unstaged changes. Please commit or stash them before switching branches."
+  echo -e "${PURPLE_BG} You have unstaged changes. Please commit or stash them before switching branches. ${NO_COLOR}"
   return 1
 fi
 
@@ -23,7 +23,7 @@ fi
 IFS=$'\n' read -r -d '' -a branch_array <<< "$branches"
 echo "$IFS"
 # 브랜치 목록을 번호와 함께 출력 (1번부터 시작)
-echo -e "${PURPLE_BG}Select a branch to switch to:${NO_COLOR}"
+echo -e "${PURPLE_BG}Select a branch to switch to: ${NO_COLOR}"
 for i in "${!branch_array[@]}"; do
   branch_name="${branch_array[$i]//\*/}"
   branch_name="${branch_name## }"  # Remove leading spaces
