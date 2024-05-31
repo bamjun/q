@@ -5,7 +5,7 @@ YELLOW_BG='\033[43m'
 NO_COLOR='\033[0m'
 
 # git branch 명령어로 브랜치 목록 가져오기
-branches=$(git branch)
+branches=$(git branch | sed 's/^..//')
 
 # 현재 브랜치 식별
 current_branch=$(git branch --show-current)
