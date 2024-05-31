@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # ANSI escape codes for coloring
-YELLOW_BG='\033[43m'
+# YELLOW_BG='\033[43m'
+# YELLOW_BG='\033[38;5;192m  \033[48;5;192m'
+YELLOW_BG='\033[38;5;196m\033[48;5;192m'
 NO_COLOR='\033[0m'
 
 # git branch 명령어로 브랜치 목록 가져오기
@@ -19,9 +21,9 @@ for i in "${!branch_array[@]}"; do
   branch_name="${branch_array[$i]//\*/}"
   branch_name="${branch_name## }"  # Remove leading spaces
   if [[ "$branch_name" == "$current_branch" ]]; then
-    echo -e "$((i + 1))) ${YELLOW_BG}${branch_array[$i]}${NO_COLOR}"
+    echo -e "$((i + 1))) ${YELLOW_BG}  ${branch_array[$i]}  ${NO_COLOR}"
   else
-    echo "$((i + 1))) ${branch_array[$i]}"
+    echo "$((i + 1)))   ${branch_array[$i]}  "
   fi
 done
 
@@ -38,7 +40,7 @@ fi
 selected_branch="${branch_array[$((branch_number - 1))]}"
 selected_branch="${selected_branch//\*/}"
 selected_branch="${selected_branch## }"  # Remove leading spaces
-echo "$selected_branch"
+
 git switch "$selected_branch"
 
 echo "Switched to branch $selected_branch"
