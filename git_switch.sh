@@ -22,7 +22,7 @@ github_repo_version=$(curl -s "https://bamjun.github.io/q/git_switch.sh" | bash 
 
 if [ "$version_index" != "$github_repo_version" ]; then
     echo "레포지토리 버전과 틀립니다."
-    echo -e "1 : 레포지토리 버전으로 덮어쓰기 ${PURPLE_BG} (do ' some.sh' not '. some.sh') ${SELECT_BG} "
+    echo -e "1 : 레포지토리 버전으로 덮어쓰기 ${PURPLE_BG} (do ' some.sh' not '. some.sh') ${NO_COLOR} "
     echo "2 : 그냥 종료"
     echo "3 : 기존 스크립트 실행"
     read choose_index
