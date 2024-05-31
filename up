@@ -7,7 +7,7 @@ COLOR_RESET="\033[0m"
 # 버전 체크
 if [ "$1" = "check_version" ]; then
     echo "$version_index"
-    exit
+    return 1
 fi
 
 github_repo_version=$(curl -s "https://bamjun.github.io/q/up" | bash -s -- check_version)
@@ -21,9 +21,9 @@ if [ "$version_index" != "$github_repo_version" ]; then
     if [ "$choose_index" == "1" ]; then
         script_path=$(realpath "$0")
         curl -o $script_path "https://bamjun.github.io/q/up"
-        exit
+        return 1
     elif [ "$choose_index" == "2" ]; then
-        exit
+        return 1
     fi
 fi
 
