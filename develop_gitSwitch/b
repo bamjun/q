@@ -3,6 +3,7 @@
 # ANSI escape codes for coloring
 # YELLOW_BG='\033[43m'
 # YELLOW_BG='\033[38;5;192m  \033[48;5;192m'
+PURPLE_BG='\033[48;5;98m'
 SELECT_BG='\033[38;5;196m\033[48;5;192m'
 NO_COLOR='\033[0m'
 
@@ -22,7 +23,7 @@ fi
 IFS=$'\n' read -r -d '' -a branch_array <<< "$branches"
 echo "$IFS"
 # 브랜치 목록을 번호와 함께 출력 (1번부터 시작)
-echo "Select a branch to switch to:"
+echo -e "${PURPLE_BG}Select a branch to switch to:${NO_COLOR}"
 for i in "${!branch_array[@]}"; do
   branch_name="${branch_array[$i]//\*/}"
   branch_name="${branch_name## }"  # Remove leading spaces
@@ -34,7 +35,7 @@ for i in "${!branch_array[@]}"; do
 done
 
 # 사용자 입력 받기
-read -p "Enter the number of the branch: " branch_number
+read -p "${PURPLE_BG}Enter the number of the branch: ${NO_COLOR}" branch_number
 
 # 유효한 번호인지 확인
 if ! [[ "$branch_number" =~ ^[0-9]+$ ]] || [ "$branch_number" -lt 1 ] || [ "$branch_number" -gt "${#branch_array[@]}" ]; then
