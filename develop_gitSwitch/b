@@ -27,7 +27,7 @@ for i in "${!branch_array[@]}"; do
   branch_name="${branch_array[$i]//\*/}"
   branch_name="${branch_name## }"  # Remove leading spaces
   if [[ "$branch_name" == "$current_branch" ]]; then
-    echo -e "$((i + 1))) ${SELECT_BG}  ${branch_array[$i]}  ${NO_COLOR}"
+    echo -e "${SELECT_BG}$((i + 1)))   ${branch_array[$i]}  ${NO_COLOR}"
   else
     echo "$((i + 1)))   ${branch_array[$i]}  "
   fi
