@@ -1,3 +1,5 @@
+#!/bin/bash
+
 COLOR_RESET="\033[0m"
 
 

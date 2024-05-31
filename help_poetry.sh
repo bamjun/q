@@ -1,3 +1,5 @@
+#!/bin/bash
+
 COLOR_RESET="\033[0m"
 
 echo -e "\033[48;5;11m\033[38;5;21m◇  poetry  ◇ ${COLOR_RESET}"
