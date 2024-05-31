@@ -35,8 +35,8 @@ for i in "${!branch_array[@]}"; do
 done
 
 # 사용자 입력 받기
-echo -e "${PURPLE_BG}Enter the number of the branch: ${NO_COLOR}"
-read -p "" branch_number
+echo -e -n "${PURPLE_BG}Enter the number of the branch: ${NO_COLOR}"
+read branch_number
 
 # 유효한 번호인지 확인
 if ! [[ "$branch_number" =~ ^[0-9]+$ ]] || [ "$branch_number" -lt 1 ] || [ "$branch_number" -gt "${#branch_array[@]}" ]; then
