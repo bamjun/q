@@ -38,7 +38,7 @@ fi
 selected_branch="${branch_array[$((branch_number - 1))]}"
 selected_branch="${selected_branch//\*/}"
 selected_branch="${selected_branch## }"  # Remove leading spaces
-
+echo "$selected_branch"
 git switch "$selected_branch"
 
 echo "Switched to branch $selected_branch"
