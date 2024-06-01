@@ -67,3 +67,4 @@ if [ "$1" = "1" ]; then
 # `. temp 2` 일때 vscode 실행하기
 elif [ "$1" = "2" ]; then
     code .
+fi
