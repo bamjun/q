@@ -6,7 +6,7 @@ NO_COLOR='\033[0m'
 
 ##################### 버전관리 start
 
-version_index="0.0.3"
+version_index="0.0.4"
 
 
 # 버전 체크
@@ -60,3 +60,10 @@ fi
 # 폴더로 이동
 echo "폴더 '$new_folder' 로 이동합니다."
 cd $new_folder
+
+# `. temp 1` 일때 임시폴더의 경로를 윈도우 브라우저로 실행하기
+if [ "$1" = "1" ]; then 
+    explorer .
+# `. temp 2` 일때 vscode 실행하기
+elif [ "$1" = "2" ]; then
+    code .
