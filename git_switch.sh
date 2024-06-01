@@ -31,7 +31,7 @@ if [ "$version_index" != "$github_repo_version" ]; then
         curl -o $script_path "https://bamjun.github.io/q/git_switch.sh"
         exit 1
     elif [ "$choose_index" == "2" ]; then
-        exit 1
+        return 1
     fi
 fi
 
