@@ -73,4 +73,5 @@ curl https://bamjun.github.io/q/
 
 - `git switch [브랜치]` 를 활용해서, 브랜치를 변경할 필요없이, `. s`로 브랜치 변경.  
 
-변경
+![alt text](images/markdown-image-8.png)  
+
