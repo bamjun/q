@@ -4,6 +4,8 @@ COLOR_RESET="\033[0m"
 
 echo -e "\033[48;5;11m\033[38;5;21m◇  docker  ◇${COLOR_RESET}"
 
+echo -e "\033[48;5;228m\033[38;5;0m  - 도커컴포즈 백그라운드 파일실행${COLOR_RESET}"
+echo -e "\033[48;5;230m\033[38;5;0m    sudo docker-compose -f docker-compose.yml up --build -d${COLOR_RESET}"
 echo -e "\033[48;5;228m\033[38;5;0m  - 도커 로그보기${COLOR_RESET}"
 echo -e "\033[48;5;230m\033[38;5;0m    docker logs [컨테이너명]${COLOR_RESET}"
 echo -e "\033[48;5;228m\033[38;5;0m  - 독커에서 실행중인 프로세서 보기${COLOR_RESET}"

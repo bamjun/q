@@ -18,7 +18,7 @@ if [ "$1" = "check_version" ]; then
     exit 1
 fi
 
-github_repo_version=$(curl -s "https://bamjun.github.io/q/git_switch.sh" | bash -s -- check_version)
+github_repo_version=$(curl -s "https://bamjun.github.io/q/env_gitSwitch.sh" | bash -s -- check_version)
 
 if [ "$version_index" != "$github_repo_version" ]; then
     echo "레포지토리 버전과 틀립니다."
@@ -28,7 +28,7 @@ if [ "$version_index" != "$github_repo_version" ]; then
     read choose_index
     if [ "$choose_index" == "1" ]; then
         script_path=$(realpath "$0")
-        curl -o $script_path "https://bamjun.github.io/q/git_switch.sh"
+        curl -o $script_path "https://bamjun.github.io/q/env_gitSwitch.sh"
         exit 1
     elif [ "$choose_index" == "2" ]; then
         return 1
