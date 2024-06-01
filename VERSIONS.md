@@ -3,7 +3,7 @@
 ---  
 ---  
 
-# env_createTempForder.sh  
+# env/env_createTempForder.sh  
 
 ### 0.0.1  
 - 당일의 폴더 만들어서 이동.  
@@ -25,7 +25,7 @@
 ---  
 ---  
 
-# env_gitPush.sh  
+# env/env_gitPush.sh  
 
 ### 0.0.1  
 - 레포지토리 버전과 틀리면 다운받을지 선택하는 기능.  
@@ -49,7 +49,7 @@
 ---  
 ---  
 
-# env_gitSwitch.sh
+# env/env_gitSwitch.sh
 
 ### 0.0.1
 - 번호로 깃 브랜치 변경
