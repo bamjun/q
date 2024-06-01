@@ -45,3 +45,29 @@ curl https://bamjun.github.io/q/
   ```bash
   curl -o temp https://bamjun.github.io/q/up
   ```
+
+
+
+
+
+  ---
+
+  ---
+
+  ---
+    
+    
+# Windows 작업환경  
+
+> 윈도우 환경 변수에 쉘스크립트를 저장한 경로를 추가하고,
+> 터미널의 어느 경로에서든지 쉘스크립트 실행해서 빠른 작업환경 구축.  
+> 나는 사용자 변수에 쉘스크립트가 있는 폴더 경로를 추가했다.  
+
+![alt text](images/markdown-image-4.png)  
+
+![alt text](images/markdown-image-5.png)  
+
+![alt text](images/markdown-image-6.png)  
+
+![alt text](images/markdown-image-7.png)  
+
