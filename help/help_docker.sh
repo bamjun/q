@@ -47,7 +47,7 @@ echo ""
 
 echo ""
 echo -e "${COLOR_RED_BACKGROUND} ∇ ∇ ∇ ∇ ∇ postgresql ∇ ∇ ∇ ∇ ∇ ${COLOR_RESET}"
-echo -e "\033[48;5;228m\033[38;5;0m  - Docker 빌드 캐시 정리${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  - Docker postgresql 컨테이너 db 진입${COLOR_RESET}"
 echo -e "\033[48;5;230m\033[38;5;0m    sudo docker exec -it [container ID] psql -U admin -d postgres${COLOR_RESET}"
 echo -e "\033[48;5;228m\033[38;5;0m  - 데이터베이스 목록 확인${COLOR_RESET}"
 echo -e "\033[48;5;230m\033[38;5;0m    \l${COLOR_RESET}"
@@ -55,7 +55,6 @@ echo -e "\033[48;5;228m\033[38;5;0m  - 새로운 데이터베이스 생성${COLO
 echo -e "\033[48;5;230m\033[38;5;0m    CREATE DATABASE db;${COLOR_RESET}"
 echo -e "\033[48;5;228m\033[38;5;0m  - 데이터베이스 삭제${COLOR_RESET}"
 echo -e "\033[48;5;230m\033[38;5;0m    DROP DATABASE db;${COLOR_RESET}"
-
 echo -e "${COLOR_RED_BACKGROUND} ∆ ∆ ∆ ∆ ∆ DB ∆ ∆ ∆ ∆ ∆ ${COLOR_RESET}"
 echo ""
 
