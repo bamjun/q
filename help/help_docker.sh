@@ -1,6 +1,7 @@
 #!/bin/bash
 
 COLOR_RESET="\033[0m"
+COLOR_RED_BACKGROUND="\033[48;5;1m"
 
 echo -e "\033[48;5;11m\033[38;5;21m◇  docker  ◇${COLOR_RESET}"
 
@@ -22,6 +23,10 @@ echo -e "\033[48;5;228m\033[38;5;0m  - Rebuild the Docker Image${COLOR_RESET}"
 echo -e "\033[48;5;230m\033[38;5;0m    docker build -t [your-image-name] .${COLOR_RESET}"
 echo -e "\033[48;5;228m\033[38;5;0m  - Clear Docker Cache${COLOR_RESET}"
 echo -e "\033[48;5;230m\033[38;5;0m    docker build --no-cache -t [your-image-name] .${COLOR_RESET}"
+
+
+echo ""
+echo -e "${COLOR_RED_BACKGROUND} ∇ ∇ ∇ ∇ ∇ 초기화 ∇ ∇ ∇ ∇ ∇ ${COLOR_RESET}"
 echo -e "\033[48;5;228m\033[38;5;0m  - 모든 Docker 컨테이너 중지${COLOR_RESET}"
 echo -e "\033[48;5;230m\033[38;5;0m    docker stop \$(docker ps -aq)${COLOR_RESET}"
 echo -e "\033[48;5;228m\033[38;5;0m  - 모든 Docker 컨테이너 삭제${COLOR_RESET}"
@@ -37,3 +42,20 @@ echo -e "\033[48;5;228m\033[38;5;0m  - 사용되지 않는 볼륨 정리${COLOR_
 echo -e "\033[48;5;230m\033[38;5;0m    docker volume prune${COLOR_RESET}"
 echo -e "\033[48;5;228m\033[38;5;0m  - Docker 빌드 캐시 정리${COLOR_RESET}"
 echo -e "\033[48;5;230m\033[38;5;0m    docker builder prune${COLOR_RESET}"
+echo -e "${COLOR_RED_BACKGROUND} ∆ ∆ ∆ ∆ ∆ 초기화 ∆ ∆ ∆ ∆ ∆ ${COLOR_RESET}"
+echo ""
+
+echo ""
+echo -e "${COLOR_RED_BACKGROUND} ∇ ∇ ∇ ∇ ∇ postgresql ∇ ∇ ∇ ∇ ∇ ${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  - Docker 빌드 캐시 정리${COLOR_RESET}"
+echo -e "\033[48;5;230m\033[38;5;0m    sudo docker exec -it [container ID] psql -U admin -d postgres${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  - 데이터베이스 목록 확인${COLOR_RESET}"
+echo -e "\033[48;5;230m\033[38;5;0m    \l${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  - 새로운 데이터베이스 생성${COLOR_RESET}"
+echo -e "\033[48;5;230m\033[38;5;0m    CREATE DATABASE db;${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  - 데이터베이스 삭제${COLOR_RESET}"
+echo -e "\033[48;5;230m\033[38;5;0m    DROP DATABASE db;${COLOR_RESET}"
+
+echo -e "${COLOR_RED_BACKGROUND} ∆ ∆ ∆ ∆ ∆ DB ∆ ∆ ∆ ∆ ∆ ${COLOR_RESET}"
+echo ""
+
