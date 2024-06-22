@@ -46,3 +46,41 @@ jobs:
             git pull origin main
             sudo docker-compose -f docker-compose.yml up --build -d
 ```
+
+### 1. Discord 웹훅 설정
+
+1. **Discord 서버로 이동**: 웹훅을 설정할 서버로 이동합니다.
+2. **설정 메뉴로 이동**: 서버 설정에서 `Integrations`를 클릭합니다.
+3. **웹훅 추가**: `Create Webhook` 버튼을 클릭하여 새로운 웹훅을 생성하고, 웹훅 URL을 복사합니다.
+
+### 2. GitHub Secrets에 Discord 웹훅 URL 추가
+
+복사한 Discord 웹훅 URL을 GitHub Secrets에 추가합니다.
+
+1. **GitHub Repository로 이동**: 배포하려는 리포지토리 페이지로 이동합니다.
+2. **Settings로 이동**: 리포지토리 상단 메뉴에서 `Settings`를 클릭합니다.
+3. **Secrets 설정**: 왼쪽 사이드바에서 `Secrets and variables` > `Actions`를 클릭합니다.
+4. **New repository secret 추가**: `New repository secret` 버튼을 클릭하여 아래와 같은 Secrets를 추가합니다:
+    - `DISCORD_WEBHOOK_URL`: Discord 웹훅 URL
+
+
+```yml
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main  # 또는 배포하고 싶은 브랜치 이름
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Send notification to Discord
+      run: |
+        curl -X POST -H "Content-Type: application/json" \
+          -d '{"content": "Deployment to server is complete!\nRepository: '${{ github.repository }}'\nCommit: '${{ github.sha }}'\nBranch: '${{ github.ref }}'"}' \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+```
