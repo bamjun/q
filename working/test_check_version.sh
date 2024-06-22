@@ -5,7 +5,16 @@ PURPLE_BG='\033[48;5;98m'
 NO_COLOR='\033[0m'
 
 
-CHECK_VERSION_SHELL_SCRIPT_VERSION_INDEX="0.0.1"
+check_version_shell_script_version_index="0.0.1"
+
+# 버전 체크
+if [ "$1" = "check_version" ]; then
+    echo "$check_version_shell_script_version_index"
+    exit 1
+fi
+
+
+
 
 
 # 버전 체크
