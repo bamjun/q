@@ -4,7 +4,9 @@
 PURPLE_BG='\033[48;5;98m'
 NO_COLOR='\033[0m'
 
-cv_version_index="0.0.1"
+
+CHECK_VERSION_SHELL_SCRIPT_VERSION_INDEX="0.0.1"
+
 
 # 버전 체크
 if [ "$1" = "check_version" ]; then

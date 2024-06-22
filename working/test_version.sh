@@ -8,7 +8,21 @@ NO_COLOR='\033[0m'
 
 
 version_index="0.0.1"
-github_repo_address="https://bamjun.github.io/q/test_version.sh"
+github_repo_address="https://bamjun.github.io/q/working/test_version.sh"
+
+
+
+SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+
+TARGET_FILE="${SCRIPT_DIR}
+
+if [ -f "$TARGET_FILE" ]; then
+  echo -e "${PURPLE_BG}This script is already exists. ${NO_COLOR}"
+fi
+
+
+
+
 
 source "$(dirname "$(realpath "$0")")"/test_check_version.sh
 
