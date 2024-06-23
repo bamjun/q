@@ -19,11 +19,3 @@ echo -e "\033[48;5;230m\033[38;5;0m    sudo lsof -i :80 ${COLOR_RESET}"
 echo -e "\033[48;5;230m\033[38;5;0m    sudo lsof -i :443 ${COLOR_RESET}"
 echo -e "\033[48;5;228m\033[38;5;0m  - Searching process ${COLOR_RESET}"
 echo -e "\033[48;5;230m\033[38;5;0m    sudo kill -9 <PID> ${COLOR_RESET}"
-
-
-
-
-
-
-sudo lsof -i :80
-sudo lsof -i :443
