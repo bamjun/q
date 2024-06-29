@@ -40,51 +40,14 @@ fi
 
 
 
-ㄹㄹㄹ
+# git remote 몇개인지 체크
+remote_count=$(git remote | wc -l)
 
-
-# git branch 명령어로 브랜치 목록 가져오기
-branches=$(git branch | sed 's/^..//')
-
-# 현재 브랜치 식별
-current_branch=$(git branch --show-current)
-
-# 스테이지에 올라가지 않은 변경 사항이 있는지 확인
-if ! git diff-index --quiet HEAD --; then
-  echo -e "${PURPLE_BG} You have unstaged changes. Please commit or stash them before switching branches. ${NO_COLOR}"
-  return 1
+if [ "$remote_count" -gt 1 ]; then
+  echo -e "${SELECT_BG} More than one repository is stored ${NO_COLOR}"
+else
+  # 현재 브랜치 식별
+  current_branch=$(git branch --show-current)
+  current_remote=$(git remote)
+  git pull ${current_remote} ${current_branch}
 fi
-
-# 브랜치 목록을 배열로 변환
-IFS=$'\n' read -r -d '' -a branch_array <<< "$branches"
-echo "$IFS"
-# 브랜치 목록을 번호와 함께 출력 (1번부터 시작)
-echo -e "${PURPLE_BG}Select a branch to switch to: ${NO_COLOR}"
-for i in "${!branch_array[@]}"; do
-  branch_name="${branch_array[$i]//\*/}"
-  branch_name="${branch_name## }"  # Remove leading spaces
-  if [[ "$branch_name" == "$current_branch" ]]; then
-    echo -e "${SELECT_BG}$((i + 1)))   ${branch_array[$i]}  ${NO_COLOR}"
-  else
-    echo "$((i + 1)))   ${branch_array[$i]}  "
-  fi
-done
-
-# 사용자 입력 받기
-echo -e -n "${PURPLE_BG}Enter the number of the branch: ${NO_COLOR}"
-read branch_number
-
-# 유효한 번호인지 확인
-if ! [[ "$branch_number" =~ ^[0-9]+$ ]] || [ "$branch_number" -lt 1 ] || [ "$branch_number" -gt "${#branch_array[@]}" ]; then
-  echo "Invalid branch number."
-  return 1
-fi
-
-# 선택한 번호에 해당하는 브랜치로 switch
-selected_branch="${branch_array[$((branch_number - 1))]}"
-selected_branch="${selected_branch//\*/}"
-selected_branch="${selected_branch## }"  # Remove leading spaces
-
-git switch "$selected_branch"
-
-echo "Switched to branch $selected_branch"
