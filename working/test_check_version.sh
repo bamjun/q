@@ -4,7 +4,7 @@
 PURPLE_BG='\033[48;5;98m'
 NO_COLOR='\033[0m'
 
-
+# 버전체크 스크립트의 버전체크
 check_version_shell_script_version_index="0.0.1"
 
 # 버전 체크
