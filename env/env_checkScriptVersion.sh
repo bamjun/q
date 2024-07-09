@@ -9,7 +9,7 @@ check_checkScriptVersion_version="0.0.1"
 
 # 버전 체크
 if [ "$1" = "check_version" ]; then
-    echo "$check_version_shell_script_version_index"
+    echo "$check_checkScriptVersion_version"
     exit 1
 fi
 
