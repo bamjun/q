@@ -5,16 +5,18 @@ PURPLE_BG='\033[48;5;98m'
 SELECT_BG='\033[38;5;196m\033[48;5;192m'
 NO_COLOR='\033[0m'
 
+echo "1"
 
 
 version_index="0.0.1"
 github_repo_address="https://bamjun.github.io/q/working/test_version.sh"
 
+echo "2"
 
 
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 
-TARGET_FILE="${SCRIPT_DIR}
+TARGET_FILE="${SCRIPT_DIR}"
 
 if [ -f "$TARGET_FILE" ]; then
   echo -e "${PURPLE_BG}This script is already exists. ${NO_COLOR}"
@@ -22,11 +24,12 @@ fi
 
 
 
+echo "3"
 
 
-source "$(dirname "$(realpath "$0")")"/test_check_version.sh"
+source "$(dirname $(realpath $0))/test_check_version.sh"
 
-
+echo "4"
 
 
 
