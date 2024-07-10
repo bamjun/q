@@ -12,7 +12,7 @@ if [ "$1" = "check_checkScriptVersion_version" ]; then
     echo "$check_checkScriptVersion_version"
     exit 1
 fi
-
+        echo "1"
 # import env_checkScriptVersion's version
 github_repo_version=$(curl -s "https://bamjun.github.io/q/env/env_checkScriptVersion.sh" | bash -s -- check_checkScriptVersion_version)
 
@@ -25,6 +25,7 @@ if [ "$check_checkScriptVersion_version" != "$github_repo_version" ]; then
     read choose_index
     if [ "$choose_index" == "1" ]; then
         script_path=$(realpath "$0")
+
         curl -o $script_path "https://bamjun.github.io/q/working/test_check_version.sh"
         exit 1
     elif [ "$choose_index" == "2" ]; then
@@ -32,15 +33,14 @@ if [ "$check_checkScriptVersion_version" != "$github_repo_version" ]; then
     fi
 fi
 
-echo "ff"
-
 
 # 버전 체크
 if [ "$1" = "check_version" ]; then
     echo "$version_index"
     exit 1
 fi
-echo ${github_repo_address}
+        echo "2"
+# echo ${github_repo_address} https://bamjun.github.io/q/working/test_version.sh
 github_repo_version=$(curl -s ${github_repo_address} | bash -s -- check_version)
 
 if [ "$version_index" != "$github_repo_version" ]; then
@@ -51,6 +51,7 @@ if [ "$version_index" != "$github_repo_version" ]; then
     read choose_index
     if [ "$choose_index" == "1" ]; then
         script_path=$(realpath "$0")
+
         curl -o $script_path ${github_repo_address}
         exit 1
     elif [ "$choose_index" == "2" ]; then
