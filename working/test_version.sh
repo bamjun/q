@@ -24,7 +24,7 @@ fi
 
 
 
-source "$(dirname "$(realpath "$0")")"/test_check_version.sh
+source "$(dirname "$(realpath "$0")")"/test_check_version.sh"
 
 
 
