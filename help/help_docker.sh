@@ -42,6 +42,8 @@ echo -e "\033[48;5;228m\033[38;5;0m  - 사용되지 않는 볼륨 정리${COLOR_
 echo -e "\033[48;5;230m\033[38;5;0m    docker volume prune${COLOR_RESET}"
 echo -e "\033[48;5;228m\033[38;5;0m  - Docker 빌드 캐시 정리${COLOR_RESET}"
 echo -e "\033[48;5;230m\033[38;5;0m    docker builder prune${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  - Docker 볼륨 전체 삭제${COLOR_RESET}"
+echo -e "\033[48;5;230m\033[38;5;0m    docker volume rm $(docker volume ls -q)${COLOR_RESET}"
 echo -e "${COLOR_RED_BACKGROUND} ∆ ∆ ∆ ∆ ∆ 초기화 ∆ ∆ ∆ ∆ ∆ ${COLOR_RESET}"
 echo ""
 
