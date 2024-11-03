@@ -1,16 +1,11 @@
 #!/bin/bash
 
-
 PURPLE_BG='\033[48;5;98m'
 SELECT_BG='\033[38;5;196m\033[48;5;192m'
 NO_COLOR='\033[0m'
 
-
-
 ##################### 버전관리 start
-
-version_index="0.0.1"
-
+version_index="0.0.2"
 
 # 버전 체크
 if [ "$1" = "check_version" ]; then
@@ -34,14 +29,7 @@ if [ "$version_index" != "$github_repo_version" ]; then
         return 1
     fi
 fi
-
 ##################### 버전관리 end
-
-
-
-
-
-
 
 # git branch 명령어로 브랜치 목록 가져오기
 branches=$(git branch | sed 's/^..//')
@@ -57,7 +45,42 @@ fi
 
 # 브랜치 목록을 배열로 변환
 IFS=$'\n' read -r -d '' -a branch_array <<< "$branches"
-echo "$IFS"
+
+# 정렬된 브랜치 배열 생성
+sorted_branches=()
+
+# main 브랜치가 있으면 먼저 추가
+for branch in "${branch_array[@]}"; do
+  branch_name="${branch//\*/}"
+  branch_name="${branch_name## }"
+  if [[ "$branch_name" == "main" ]]; then
+    sorted_branches+=("$branch")
+    break
+  fi
+done
+
+# dev 브랜치가 있으면 그 다음에 추가
+for branch in "${branch_array[@]}"; do
+  branch_name="${branch//\*/}"
+  branch_name="${branch_name## }"
+  if [[ "$branch_name" == "dev" ]]; then
+    sorted_branches+=("$branch")
+    break
+  fi
+done
+
+# 나머지 브랜치들을 추가 (main과 dev 제외)
+for branch in "${branch_array[@]}"; do
+  branch_name="${branch//\*/}"
+  branch_name="${branch_name## }"
+  if [[ "$branch_name" != "main" && "$branch_name" != "dev" ]]; then
+    sorted_branches+=("$branch")
+  fi
+done
+
+# branch_array를 정렬된 배열로 교체
+branch_array=("${sorted_branches[@]}")
+
 # 브랜치 목록을 번호와 함께 출력 (1번부터 시작)
 echo -e "${PURPLE_BG}Select a branch to switch to: ${NO_COLOR}"
 for i in "${!branch_array[@]}"; do
