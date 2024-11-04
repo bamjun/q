@@ -5,7 +5,7 @@ SELECT_BG='\033[38;5;196m\033[48;5;192m'
 NO_COLOR='\033[0m'
 
 ##################### 버전관리 start
-version_index="0.0.3"
+version_index="0.0.4"
 
 # 버전 체크
 if [ "$1" = "check_version" ]; then
@@ -91,7 +91,7 @@ show_and_manage_branches() {
 
     # 브랜치 목록을 번호와 함께 출력 (1번부터 시작)
     if [ "$DELETE_MODE" = true ]; then
-        echo -e "${PURPLE_BG}Select a branch to delete (or press q to quit): ${NO_COLOR}"
+        echo -e "${PURPLE_BG}Select a branch to delete: ${NO_COLOR}"
     else
         echo -e "${PURPLE_BG}Select a branch to switch to: ${NO_COLOR}"
     fi
@@ -110,12 +110,12 @@ show_and_manage_branches() {
     if [ "$DELETE_MODE" = true ]; then
         echo -e -n "${PURPLE_BG}Enter the number of the branch to delete (q to quit): ${NO_COLOR}"
     else
-        echo -e -n "${PURPLE_BG}Enter the number of the branch: ${NO_COLOR}"
+        echo -e -n "${PURPLE_BG}Enter the number of the branch (q to quit): ${NO_COLOR}"
     fi
     read branch_number
 
     # 종료 조건 체크
-    if [ "$DELETE_MODE" = true ] && [ "$branch_number" = "q" ]; then
+    if [ "$branch_number" = "q" ]; then
         return 0
     fi
 
