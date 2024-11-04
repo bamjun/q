@@ -1,6 +1,7 @@
 #!/bin/bash
 
 PURPLE_BG='\033[48;5;98m'
+RED_BG='\033[48;5;124m'
 SELECT_BG='\033[38;5;196m\033[48;5;192m'
 NO_COLOR='\033[0m'
 
@@ -91,7 +92,7 @@ show_and_manage_branches() {
 
     # 브랜치 목록을 번호와 함께 출력 (1번부터 시작)
     if [ "$DELETE_MODE" = true ]; then
-        echo -e "${PURPLE_BG}Select a branch to delete: ${NO_COLOR}"
+        echo -e "${RED_BG}Select a branch to delete: ${NO_COLOR}"
     else
         echo -e "${PURPLE_BG}Select a branch to switch to: ${NO_COLOR}"
     fi
@@ -108,7 +109,7 @@ show_and_manage_branches() {
 
     # 사용자 입력 받기
     if [ "$DELETE_MODE" = true ]; then
-        echo -e -n "${PURPLE_BG}Enter the number of the branch to delete (q to quit): ${NO_COLOR}"
+        echo -e -n "${RED_BG}Enter the number of the branch to delete (q to quit): ${NO_COLOR}"
     else
         echo -e -n "${PURPLE_BG}Enter the number of the branch (q to quit): ${NO_COLOR}"
     fi
