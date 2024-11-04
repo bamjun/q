@@ -6,7 +6,7 @@ SELECT_BG='\033[38;5;196m\033[48;5;192m'
 NO_COLOR='\033[0m'
 
 ##################### 버전관리 start
-version_index="0.0.4"
+version_index="0.0.5"
 
 # 버전 체크
 if [ "$1" = "check_version" ]; then
