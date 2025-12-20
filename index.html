@@ -10,65 +10,22 @@ extract_json_value() {
   printf '%s\n' "$1" | sed -n 's/^[[:space:]]*"[^"]*"[[:space:]]*:[[:space:]]*"\(.*\)"[[:space:]]*,\{0,1\}[[:space:]]*$/\1/p'
 }
 
-resolve_json_path() {
-  if [ -n "${INSTALLATIONS_JSON:-}" ]; then
-    printf '%s\n' "$INSTALLATIONS_JSON"
-    return 0
-  fi
-
-  if [ -n "${BASH_SOURCE[0]:-}" ] && [ -f "${BASH_SOURCE[0]}" ]; then
-    local script_dir
-    script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-    printf '%s\n' "$script_dir/installations.json"
-    return 0
-  fi
-
-  printf '%s\n' "$(pwd)/installations.json"
-}
-
-make_temp_file() {
-  if command -v mktemp >/dev/null 2>&1; then
-    mktemp 2>/dev/null && return 0
-  fi
-  printf '%s\n' "./installations.json.tmp.$$"
-}
-
-fetch_json() {
-  local url="$1"
-  local output="$2"
-
-  if command -v curl >/dev/null 2>&1; then
-    curl -fsSL "$url" -o "$output"
-    return $?
-  fi
-
-  if command -v wget >/dev/null 2>&1; then
-    wget -qO "$output" "$url"
-    return $?
-  fi
-
-  return 127
-}
-
-json_url="${INSTALLATIONS_JSON_URL:-https://bamjun.github.io/q/installations.json}"
-json_path="$(resolve_json_path)"
-if [ ! -f "$json_path" ]; then
-  tmp_json_path="$(make_temp_file)"
-  if [ -z "$tmp_json_path" ]; then
-    echo "Failed to create temp file for installations.json" >&2
-    exit 1
-  fi
-
-  if ! fetch_json "$json_url" "$tmp_json_path"; then
-    echo "installations.json not found: $json_path" >&2
-    echo "Failed to download: $json_url" >&2
-    echo "Set INSTALLATIONS_JSON to a valid file path or INSTALLATIONS_JSON_URL to a valid URL." >&2
-    exit 1
-  fi
-
-  json_path="$tmp_json_path"
-  trap 'rm -f -- "$tmp_json_path"' EXIT
-fi
+JSON_DATA='{
+  "installations": [
+    {
+      "name": "rustup",
+      "command": "curl --proto '=https' --tlsv1.2 https://sh.rustup.rs -sSf | sh"
+    },
+    {
+      "name": "uv",
+      "command": "curl -LsSf https://astral.sh/uv/install.sh | sh"
+    },
+    {
+      "name": "homebrew",
+      "command": "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+    }
+  ]
+}'
 
 names=()
 commands=()
@@ -103,11 +60,11 @@ while IFS= read -r line; do
     name_set=0
     cmd_set=0
   fi
-done < "$json_path"
+done <<< "$JSON_DATA"
 
 total="${#names[@]}"
 if [ "$total" -eq 0 ]; then
-  echo "No installations found in $json_path" >&2
+  echo "No installations found in embedded JSON data" >&2
   exit 1
 fi
 
