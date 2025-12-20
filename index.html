@@ -1,28 +1,174 @@
-echo "  git clone https://github.com/bamjun/q.git  "
-echo "  curl -s https://bamjun.github.io/q/ | bash  "
-echo "  curl -o file https://bamjun.github.io/q/  "
+#!/usr/bin/env bash
 
-COLOR_RESET="\033[0m"
+json_unescape() {
+  # Interpret JSON backslash escapes.
+  printf '%b' "$1"
+}
 
+extract_json_value() {
+  # Extract the JSON string value from a single-line "key": "value" pair.
+  printf '%s\n' "$1" | sed -n 's/^[[:space:]]*"[^"]*"[[:space:]]*:[[:space:]]*"\(.*\)"[[:space:]]*,\{0,1\}[[:space:]]*$/\1/p'
+}
 
-echo -e "\033[48;5;46m"
-echo -e "\033[48;5;46m ${COLOR_RESET}"
-echo -e "\033[48;5;11m\033[38;5;21m◇  HELPs  ◇${COLOR_RESET}"
-echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/help/help_py_env.sh ${COLOR_RESET}"
-echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/help/help_docker.sh ${COLOR_RESET}"
-echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/help/help_git.sh ${COLOR_RESET}"
-echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/help/help_linux.sh ${COLOR_RESET}"
-echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/help/help_colorTest.sh ${COLOR_RESET}"
+resolve_json_path() {
+  if [ -n "${INSTALLATIONS_JSON:-}" ]; then
+    printf '%s\n' "$INSTALLATIONS_JSON"
+    return 0
+  fi
 
-echo -e "\033[48;5;46m"
-echo -e "\033[48;5;46m ${COLOR_RESET}"
-echo -e "\033[48;5;11m\033[38;5;21m◇  ENVs  ◇${COLOR_RESET}"
-echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/env/env_gitSwitch.sh ${COLOR_RESET}"
-echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/env/env_createTempForder.sh ${COLOR_RESET}"
-echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/env/env_gitPush.sh ${COLOR_RESET}"
-echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/env/env_gitPull.sh ${COLOR_RESET}"
+  if [ -n "${BASH_SOURCE[0]:-}" ] && [ -f "${BASH_SOURCE[0]}" ]; then
+    local script_dir
+    script_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+    printf '%s\n' "$script_dir/installations.json"
+    return 0
+  fi
 
-echo -e "\033[48;5;46m"
-echo -e "\033[48;5;46m ${COLOR_RESET}"
-echo -e "\033[48;5;11m\033[38;5;21m◇  bashScript  ◇${COLOR_RESET}"
-echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/bashScript/django_delete_migrations.sh ${COLOR_RESET}"
+  printf '%s\n' "$(pwd)/installations.json"
+}
+
+make_temp_file() {
+  if command -v mktemp >/dev/null 2>&1; then
+    mktemp 2>/dev/null && return 0
+  fi
+  printf '%s\n' "./installations.json.tmp.$$"
+}
+
+fetch_json() {
+  local url="$1"
+  local output="$2"
+
+  if command -v curl >/dev/null 2>&1; then
+    curl -fsSL "$url" -o "$output"
+    return $?
+  fi
+
+  if command -v wget >/dev/null 2>&1; then
+    wget -qO "$output" "$url"
+    return $?
+  fi
+
+  return 127
+}
+
+json_url="${INSTALLATIONS_JSON_URL:-https://bamjun.github.io/q/installations.json}"
+json_path="$(resolve_json_path)"
+if [ ! -f "$json_path" ]; then
+  tmp_json_path="$(make_temp_file)"
+  if [ -z "$tmp_json_path" ]; then
+    echo "Failed to create temp file for installations.json" >&2
+    exit 1
+  fi
+
+  if ! fetch_json "$json_url" "$tmp_json_path"; then
+    echo "installations.json not found: $json_path" >&2
+    echo "Failed to download: $json_url" >&2
+    echo "Set INSTALLATIONS_JSON to a valid file path or INSTALLATIONS_JSON_URL to a valid URL." >&2
+    exit 1
+  fi
+
+  json_path="$tmp_json_path"
+  trap 'rm -f -- "$tmp_json_path"' EXIT
+fi
+
+names=()
+commands=()
+name_set=0
+cmd_set=0
+current_name=""
+current_command=""
+
+while IFS= read -r line; do
+  case "$line" in
+    *\"name\"*)
+      raw_value="$(extract_json_value "$line")"
+      if [ -n "$raw_value" ]; then
+        current_name="$(json_unescape "$raw_value")"
+        name_set=1
+      fi
+      ;;
+    *\"command\"*)
+      raw_value="$(extract_json_value "$line")"
+      if [ -n "$raw_value" ]; then
+        current_command="$(json_unescape "$raw_value")"
+        cmd_set=1
+      fi
+      ;;
+  esac
+
+  if [ "$name_set" -eq 1 ] && [ "$cmd_set" -eq 1 ]; then
+    names+=("$current_name")
+    commands+=("$current_command")
+    current_name=""
+    current_command=""
+    name_set=0
+    cmd_set=0
+  fi
+done < "$json_path"
+
+total="${#names[@]}"
+if [ "$total" -eq 0 ]; then
+  echo "No installations found in $json_path" >&2
+  exit 1
+fi
+
+per_page=5
+page=0
+pages=$(( (total + per_page - 1) / per_page ))
+
+print_page() {
+  local start=$((page * per_page))
+  local end=$((start + per_page - 1))
+  local idx=0
+  local display=0
+
+  if [ "$end" -ge $((total - 1)) ]; then
+    end=$((total - 1))
+  fi
+
+  printf '\nInstallations (%d/%d)\n' $((page + 1)) "$pages"
+  for ((idx=start; idx<=end; idx++)); do
+    display=$((idx - start + 1))
+    printf ' %d) %s\n' "$display" "${names[idx]}"
+  done
+  printf '\n'
+  printf 'n: next page, N: previous page, q: quit, 1-5: run\n'
+}
+
+while true; do
+  print_page
+  printf '> '
+  IFS= read -r choice
+
+  case "$choice" in
+    q|Q)
+      exit 0
+      ;;
+    n)
+      if [ $((page + 1)) -lt "$pages" ]; then
+        page=$((page + 1))
+      else
+        echo "Already at last page."
+      fi
+      ;;
+    N)
+      if [ "$page" -gt 0 ]; then
+        page=$((page - 1))
+      else
+        echo "Already at first page."
+      fi
+      ;;
+    [1-5])
+      selection=$((page * per_page + choice - 1))
+      if [ "$selection" -ge 0 ] && [ "$selection" -lt "$total" ]; then
+        echo "Running: ${names[selection]}"
+        echo "Command: ${commands[selection]}"
+        bash -c "${commands[selection]}"
+      else
+        echo "Invalid selection."
+      fi
+      ;;
+    *)
+      echo "Invalid input."
+      ;;
+  esac
+done

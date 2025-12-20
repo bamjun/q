@@ -1,0 +1,28 @@
+echo "  git clone https://github.com/bamjun/q.git  "
+echo "  curl -s https://bamjun.github.io/q/ | bash  "
+echo "  curl -o file https://bamjun.github.io/q/  "
+
+COLOR_RESET="\033[0m"
+
+
+echo -e "\033[48;5;46m"
+echo -e "\033[48;5;46m ${COLOR_RESET}"
+echo -e "\033[48;5;11m\033[38;5;21m◇  HELPs  ◇${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/help/help_py_env.sh ${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/help/help_docker.sh ${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/help/help_git.sh ${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/help/help_linux.sh ${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/help/help_colorTest.sh ${COLOR_RESET}"
+
+echo -e "\033[48;5;46m"
+echo -e "\033[48;5;46m ${COLOR_RESET}"
+echo -e "\033[48;5;11m\033[38;5;21m◇  ENVs  ◇${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/env/env_gitSwitch.sh ${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/env/env_createTempForder.sh ${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/env/env_gitPush.sh ${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/env/env_gitPull.sh ${COLOR_RESET}"
+
+echo -e "\033[48;5;46m"
+echo -e "\033[48;5;46m ${COLOR_RESET}"
+echo -e "\033[48;5;11m\033[38;5;21m◇  bashScript  ◇${COLOR_RESET}"
+echo -e "\033[48;5;228m\033[38;5;0m  https://bamjun.github.io/q/bashScript/django_delete_migrations.sh ${COLOR_RESET}"
