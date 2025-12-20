@@ -91,10 +91,27 @@ print_page() {
   printf 'n: next page, N: previous page, q: quit, 1-5: run\n'
 }
 
+read_choice() {
+  if [ -t 0 ]; then
+    IFS= read -r choice
+    return $?
+  fi
+
+  if [ -r /dev/tty ]; then
+    IFS= read -r choice < /dev/tty
+    return $?
+  fi
+
+  return 1
+}
+
 while true; do
   print_page
   printf '> '
-  IFS= read -r choice
+  if ! read_choice; then
+    echo "No interactive input available. Run with a TTY or use: bash -c \"\$(curl -fsSL https://bamjun.github.io/q/)\"" >&2
+    exit 1
+  fi
 
   case "$choice" in
     q|Q)
