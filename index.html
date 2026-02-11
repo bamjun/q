@@ -21,9 +21,13 @@ JSON_DATA='{
       "command": "curl -LsSf https://astral.sh/uv/install.sh | sh"
     },
     {
-      "name": "homebrew",
+      "name": "homebrew(Linux|macOS)",
       "command": "curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh | bash"
-    }
+    },
+    {
+      "name": "rclone(Linux|macOS)",
+      "command": "sudo -v ; curl https://rclone.org/install.sh | sudo bash"
+    },
   ]
 }'
 
